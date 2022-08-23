@@ -1,0 +1,30 @@
+<div class="container product-container">
+  <div class="spinner-border text-info" role="status" *ngIf="!isLoaded">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+
+  <div *ngIf="errorLoading">
+    <h2>Oops, something went wrong :(</h2>
+  </div>
+
+  <div
+    *ngIf="isShown"
+    class="alert alert-success box-msg fixed-top"
+    role="alert"
+  >
+    <strong>Add to cart!</strong>
+  </div>
+
+  <div class="row" *ngIf="isLoaded">
+    <div
+      class="col-sm-4 product-index"
+      *ngFor="let product of products; index as i"
+    >
+      <app-product
+        [productItem]="product"
+        (addToCart)="addToCart($event.product, $event.amount)"
+        (hideProduct)="hideProduct($event)"
+      ></app-product>
+    </div>
+  </div>
+</div>

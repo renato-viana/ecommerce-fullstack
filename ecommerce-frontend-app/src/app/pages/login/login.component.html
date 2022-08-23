@@ -1,0 +1,52 @@
+<div class="container">
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="form-signin pt-5">
+    <div class="p-2">
+      <input
+        type="email"
+        class="form-control is-invalid"
+        placeholder="Email"
+        name="email"
+        [(ngModel)]="email"
+        [class.is-invalid]="showError('email', form)"
+        required
+        email
+        #emailInput
+      />
+      <div *ngIf="showError('email', form)" class="invalid-feedback">
+        E-mail inválido.
+      </div>
+    </div>
+
+    <div class="p-2">
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Password"
+        name="password"
+        [(ngModel)]="password"
+        [ngClass]="showError('password', form) ? 'is-invalid' : ''"
+        required
+        #passwordInput
+      />
+      <div *ngIf="showError('password', form)" class="invalid-feedback">
+        Password inválido.
+      </div>
+    </div>
+
+    <p *ngIf="false">Usuário ou senha inválidos.</p>
+
+    <div class="p-2">
+      <button
+        class="btn btn-lg btn-primary btn-block"
+        type="submit"
+        [disabled]="false"
+      >
+        Entrar
+      </button>
+    </div>
+  </form>
+
+  <div *ngIf="" class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>

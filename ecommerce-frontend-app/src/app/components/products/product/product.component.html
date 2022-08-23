@@ -1,0 +1,28 @@
+<div class="product-container">
+  <a
+    class="nav-link active"
+    routerLink="/products/:id"
+    routerLinkActive="active"
+    (click)="goToProductDetail(productItem.id)"
+  >
+    <img class="product-image" src="{{ productItem.url }}" />
+  </a>
+  <h3>{{ productItem.name }}</h3>
+  <p>
+    <strong>{{ productItem.price | currency: "USD" }} </strong>
+  </p>
+
+  <select class="select-input" [(ngModel)]="selectedAmount">
+    <option [ngValue]="item.id" *ngFor="let item of items">
+      {{ item.id }}
+    </option>
+  </select>
+
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="add(productItem, selectedAmount)"
+  >
+    Add to cart
+  </button>
+</div>

@@ -1,0 +1,20 @@
+<div class="container">
+  <div *ngIf="cartProductList.length === 0" class="alert alert-warning">
+    Your Cart is Empty.
+  </div>
+
+  <div
+    class="cart-container"
+    *ngFor="let orderItem of cartProductList; index as i"
+  >
+    <app-cart-item [cartItem]="orderItem"> </app-cart-item>
+  </div>
+  <div class="cart-container" *ngIf="cartTotal !== 0">
+    <p>
+      <strong>Total:{{ cartTotal | currency: "USD" }}</strong>
+    </p>
+  </div>
+  <div class="cart-container">
+    <app-cart-form></app-cart-form>
+  </div>
+</div>

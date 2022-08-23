@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="text-center" *ngIf="errorLoading">
+    <h2>Oops, product not found :(</h2>
+  </div>
+
+  <div class="container product-container" *ngIf="isLoaded">
+    <div
+      *ngIf="isShown"
+      class="alert alert-success box-msg fixed-top"
+      role="alert"
+    >
+      <strong>Add to cart!</strong>
+    </div>
+    <div class="detail-container">
+      <img class="" src="{{ product.url }}" />
+      <div class="detail-item">
+        <h3>{{ product.name }}</h3>
+        <p>
+          {{ product.price | currency: "USD" }}
+        </p>
+        <p>
+          {{ product.description }}
+        </p>
+
+        <select class="select-input" [(ngModel)]="selectedAmount">
+          <option [ngValue]="item.id" *ngFor="let item of items">
+            {{ item.id }}
+          </option>
+        </select>
+
+        <div class="d-grid gap-2 d-md-block">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="addToCart(product, selectedAmount)"
+          >
+            Add to cart
+          </button>
+        </div>
+        <a class="back-link" routerLink="/" routerLinkActive="active">
+          &larr;Back to product list
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
