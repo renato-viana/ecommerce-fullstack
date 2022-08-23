@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -15,21 +16,21 @@ export class LoginComponent {
 
   constructor() { }
 
-  onSubmit(form: any): void {
+  onSubmit(form: NgForm): void {
 
-    if (form.controls.email.invalid) {
+    if (form.controls['email'].invalid) {
       this.emailInput.nativeElement.focus();
       return;
     }
 
-    if (form.controls.password.invalid) {
+    if (form.controls['password'].invalid) {
       this.passwordInput.nativeElement.focus();
       return;
     }
 
   }
 
-  showError(controlName: string, form: any): boolean {
+  showError(controlName: string, form: NgForm): boolean {
     if (!form.controls[controlName]) {
       return false;
     }
