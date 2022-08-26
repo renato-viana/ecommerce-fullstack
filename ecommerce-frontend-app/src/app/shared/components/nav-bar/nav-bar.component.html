@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg header">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="" routerLinkActive="active">MyStore</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a
+          class="nav-link active"
+          routerLink="/home"
+          routerLinkActive="active"
+          aria-current="page"
+          >Home</a
+        >
+        <a class="nav-link active" routerLink="/cart" routerLinkActive="active"
+          >Cart</a
+        >
+        <a class="nav-link active" routerLink="/about" routerLinkActive="active"
+          >About</a
+        >
+        <a
+          class="nav-link active"
+          routerLink="/sign-up"
+          routerLinkActive="active"
+          >Sign Up</a
+        >
+        <li>
+          <button class="btn btn-dark" (click)="logout()">Logout</button>
+        </li>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+
 import { OrderItem } from '../models/OrderItem';
-import { Subject, Observable } from 'rxjs';
 import { Product } from '../models/Product';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { Product } from '../models/Product';
 export class CartService {
 
   cartProductList: OrderItem[] = [];
-  cartTotal = 0;
+  cartTotal: number = 0;
 
   subject = new Subject<OrderItem>();
 
@@ -89,4 +90,15 @@ export class CartService {
     return this.cartTotal;
   }
 
+  cartChanges() {
+    this.getCartItem().subscribe((productItem: OrderItem) => {
+      if (productItem.amount < 1) {
+        this.removeProduct(productItem);
+        this.cartProductList = this.getCartList();
+      } else {
+        this.updateCart(productItem)
+      }
+      this.cartTotal = this.calculateTotal(this.cartProductList);
+    })
+  }
 }

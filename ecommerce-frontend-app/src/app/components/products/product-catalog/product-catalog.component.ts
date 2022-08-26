@@ -23,10 +23,7 @@ export class ProductCatalogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.loadData();
-    }, 3000);
-
+    this.loadData();
   }
 
   loadData(): void {

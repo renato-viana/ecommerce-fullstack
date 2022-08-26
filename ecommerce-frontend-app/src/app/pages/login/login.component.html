@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container text-center">
   <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="form-signin pt-5">
     <div class="p-2">
       <input
@@ -13,7 +13,7 @@
         #emailInput
       />
       <div *ngIf="showError('email', form)" class="invalid-feedback">
-        E-mail inválido.
+        Invalid email.
       </div>
     </div>
 
@@ -29,24 +29,26 @@
         #passwordInput
       />
       <div *ngIf="showError('password', form)" class="invalid-feedback">
-        Password inválido.
+        Invalid password.
       </div>
     </div>
 
-    <p *ngIf="false">Usuário ou senha inválidos.</p>
+    <p class="text-danger" *ngIf="errorLogin">
+      Username or password is invalid.
+    </p>
 
     <div class="p-2">
       <button
         class="btn btn-lg btn-primary btn-block"
         type="submit"
-        [disabled]="false"
+        [disabled]="isLoading"
       >
         Entrar
       </button>
     </div>
   </form>
 
-  <div *ngIf="" class="spinner-border" role="status">
-    <span class="sr-only">Loading...</span>
+  <div class="spinner-border text-info" role="status" *ngIf="isLoading">
+    <span class="visually-hidden">Loading...</span>
   </div>
 </div>

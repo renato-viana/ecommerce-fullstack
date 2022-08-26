@@ -1,41 +1,31 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
-import { CartFormComponent } from './components/cart/cart-form/cart-form.component';
-import { CartItemComponent } from './components/cart/cart-item/cart-item.component';
-import { CartComponent } from './components/cart/cart.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-import { ProductsModule } from './components/products/products.module';
 import { HttpErrorInterceptor } from './http-error.interceptor';
-import { ConfirmationComponent } from './pages/confirmation/confirmation.component';
-import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { HomeComponent } from './pages/home/home.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavBarComponent,
-    FooterComponent,
-    CartComponent,
-    CartItemComponent,
-    CartFormComponent,
-    ConfirmationComponent,
-    NotFoundComponent,
-    LoginComponent,
-    HomeComponent
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    ProductsModule,
-    FormsModule
+    SharedModule,
+    NgbModule,
+    ToastrModule.forRoot(),
+    FontAwesomeModule
   ],
   providers: [
     {

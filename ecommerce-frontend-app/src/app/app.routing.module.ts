@@ -1,22 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CartComponent } from './components/cart/cart.component';
-import { ProductItemDetailComponent } from './components/products/product-item-detail/product-item-detail.component';
-import { AboutComponent } from './pages/about/about.component';
-import { ConfirmationComponent } from './pages/confirmation/confirmation.component';
-import { HomeComponent } from './pages/home/home.component';
-import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { IsLoggedInGuard } from './shared/guards/is-logged-in/is-logged-in.guard';
+import { IsLoggedOutGuard } from './shared/guards/is-logged-out/is-logged-out.guard';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'cart', component: CartComponent },
-  { path: 'products/:id', component: ProductItemDetailComponent },
-  { path: 'confirmation', component: ConfirmationComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  {
+    path: '',
+    loadChildren: () => import('./pages/logged-in/logged-in.module').then(m => m.LoggedInModule),
+    canActivate: [IsLoggedInGuard]
+  },
+  {
+    path: 'about',
+    loadChildren: () => import('./pages/logged-in/about/about.module').then(m => m.AboutModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule),
+    canActivate: [IsLoggedOutGuard]
+  },
   { path: '**', component: NotFoundComponent }
 ];
 
