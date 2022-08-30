@@ -41,8 +41,6 @@ export class SignUpComponent implements OnInit {
       const control = this.signUpForm.get(field);
       control!.markAsTouched();
     });
-
-
   }
 
   onSubmit(): void {

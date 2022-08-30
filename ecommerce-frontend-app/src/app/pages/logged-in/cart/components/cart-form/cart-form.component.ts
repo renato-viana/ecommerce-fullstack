@@ -31,4 +31,8 @@ export class CartFormComponent implements OnInit {
 
     this.router.navigate(['/confirmation']);
   }
+
+  cartTotalPrice() {
+    return this.cartService.cartTotal;
+  }
 }
