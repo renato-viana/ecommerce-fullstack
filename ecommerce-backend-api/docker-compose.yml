@@ -1,0 +1,63 @@
+version: '3.9'
+
+networks:
+  ecommerce-network:
+    driver: bridge
+
+services:
+  ecommerce-postgres:
+    image: postgres:14.1
+    container_name: ecommerce-postgres
+    env_file:
+      - dev.env
+    ports:
+      - 5433:5432
+    networks:
+      - ecommerce-network
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  db-migrate:
+    build: .
+    env_file:
+      - dev.env
+    command:
+      [
+        '/wait-for-it.sh',
+        'ecommerce-postgres:5433',
+        '-t',
+        '10',
+        '--',
+        'npm',
+        'run',
+        'up'
+      ]
+    networks:
+      - ecommerce-network
+    depends_on:
+      - ecommerce-postgres
+
+  ecommerce-api:
+    image: ecommerce-api
+    container_name: ecommerce-api
+    command:
+      [
+        '/wait-for-it.sh',
+        'ecommerce-postgres:5433',
+        '-t',
+        '15',
+        '--',
+        'npm',
+        'start'
+      ]
+    env_file:
+      - dev.env
+    ports:
+      - 8080:8080
+    networks:
+      - ecommerce-network
+    depends_on:
+      - ecommerce-postgres
+
+volumes:
+  pgdata:

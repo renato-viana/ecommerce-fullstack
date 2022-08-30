@@ -1,0 +1,38 @@
+version: '3.9'
+
+networks:
+  ecommerce-network-test:
+    driver: bridge
+
+services:
+  ecommerce-postgres-test:
+    image: postgres:14.1
+    container_name: ecommerce-postgres-test
+    environment:
+      POSTGRES_DB: 'ecommerce-db-test'
+      POSTGRES_USER: 'full_stack_test'
+      POSTGRES_PASSWORD: password123
+    ports:
+      - 5433:5432
+    networks:
+      - ecommerce-network-test
+
+  db-migrate-test:
+    build: .
+    env_file:
+      - dev.test
+    command:
+      [
+        '/wait-for-it.sh',
+        'ecommerce-postgres-test:5433',
+        '-t',
+        '10',
+        '--',
+        'npm',
+        'run',
+        'up'
+      ]
+    networks:
+      - ecommerce-network-test
+    depends_on:
+      - ecommerce-postgres-test

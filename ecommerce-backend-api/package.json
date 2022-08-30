@@ -1,0 +1,50 @@
+{
+  "name": "storefront_backend",
+  "version": "0.1.0",
+  "description": "",
+  "main": "server.ts",
+  "scripts": {
+    "start": "node ./dist/src/server.js",
+    "build": "rm -rf dist && tsc -b .",
+    "up": "db-migrate up",
+    "dev": "set API_PORT=8081 && nodemon src/server.ts",
+    "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/server.js'",
+    "test": "docker-compose -f docker-compose.test.yml up && set ENV=test && jasmine-ts",
+    "jasmine": "set ENV=test && jasmine-ts",
+    "lint": "eslint ./**/*.ts"
+  },
+  "author": "Renato Borges Viana",
+  "license": "ISC",
+  "dependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.9",
+    "@types/jsonwebtoken": "^8.5.6",
+    "@types/pg": "^7.14.7",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "db-migrate": "^0.11.13",
+    "db-migrate-pg": "^1.2.2",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.5.1"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^3.6.3",
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "eslint": "^8.22.0",
+    "eslint-config-standard-with-typescript": "^22.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.4",
+    "eslint-plugin-promise": "^6.0.0",
+    "jasmine": "^3.6.4",
+    "jasmine-spec-reporter": "^6.0.0",
+    "jasmine-ts": "^0.3.0",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.8.1",
+    "tsc-watch": "^4.2.9",
+    "typescript": "^4.7.4"
+  }
+}
