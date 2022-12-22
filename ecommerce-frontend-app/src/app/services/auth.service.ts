@@ -34,7 +34,7 @@ export class AuthService {
     return null;
   }
 
-  public decodePayloadJWT(): UserTokenPayload | null {
+  decodePayloadJWT(): UserTokenPayload | null {
     try {
       const token = this.getToken();
 

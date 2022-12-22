@@ -2,17 +2,17 @@
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="" routerLinkActive="active">MyStore</a>
     <button
-      class="navbar-toggler"
+      class="navbar-toggler dropdown-hover-all"
       type="button"
       data-bs-toggle="collapse"
-      data-bs-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup"
+      data-bs-target="#navbarNavDarkDropdown"
+      aria-controls="navbarNavDarkDropdown"
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
       <div class="navbar-nav">
         <a
           class="nav-link active"
@@ -24,14 +24,37 @@
         <a class="nav-link active" routerLink="/about" routerLinkActive="active"
           >About</a
         >
-        <a
-          class="nav-link active"
-          routerLink=""
-          routerLinkActive="active"
-          (click)="logout()"
-        >
-          Logout
-        </a>
+        <!-- Dropdown User Logout -->
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDarkDropdownMenuLink"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {{ userTokenPayload!.user.name }}
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-dark"
+              aria-labelledby="navbarDarkDropdownMenuLink"
+            >
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink=""
+                  routerLinkActive="active"
+                  (click)="logout()"
+                >
+                  Logout
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
         <a class="nav-link active" routerLink="/cart" routerLinkActive="active">
           <fa-icon [icon]="faShoppingCart" class=""></fa-icon>
           Cart

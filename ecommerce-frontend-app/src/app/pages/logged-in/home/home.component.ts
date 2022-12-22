@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     const user = this.authService.decodePayloadJWT();
     this.user = user !== null ? user : {} as UserTokenPayload;
-    console.log("Teste: " + this.user.name);
   }
 
   openModal(content: any) {
