@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "frontend:install": "cd ecommerce-frontend-app && npm install -f",
+    "frontend:start": "cd ecommerce-frontend-app && npm run start",
+    "frontend:build": "cd ecommerce-frontend-app && npm run build",
+    "frontend:test": "cd ecommerce-frontend-app && npm run test",
+    "frontend:e2e": "cd ecommerce-frontend-app && npm run e2e",
+    "frontend:lint": "cd ecommerce-frontend-app && npm run lint",
+    "frontend:deploy": "cd ecommerce-frontend-app && npm run deploy",
+    "api:install": "cd ecommerce-backend-api && npm install .",
+    "api:build": "cd ecommerce-backend-api && npm run build",
+    "api:start": "cd ecommerce-backend-api && npm run dev",
+    "api:deploy": "cd ecommerce-backend-api && npm run deploy",
+    "deploy": "npm run api:deploy && npm run frontend:deploy"
+  }
+}

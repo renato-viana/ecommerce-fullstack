@@ -15,7 +15,7 @@ COPY package*.json ./
 RUN npm install --Production
 
 COPY --from=builder /usr/app/dist ./dist
-COPY dev.env .
+COPY .env .
 COPY test.env .
 COPY migrations /usr/app/migrations
 COPY database.json .

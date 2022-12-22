@@ -13,6 +13,7 @@ export class CartComponent implements OnInit {
 
   cartProductList: OrderItem[] = [];
   cartTotal: number = 0;
+  cartItems: number = 0;
   faLongArrowAltLeft = faLongArrowAltLeft;
 
   constructor(private cartService: CartService) { }
@@ -21,6 +22,8 @@ export class CartComponent implements OnInit {
     this.getCartList();
 
     this.cartChanges();
+
+    this.cartItemsQuantity();
   }
 
   private getCartList() {
@@ -39,6 +42,12 @@ export class CartComponent implements OnInit {
       }
       this.cartTotal = this.cartService.calculateTotal(this.cartProductList);
     })
+  }
+
+  private cartItemsQuantity(): void {
+    this.cartItems = this.getCartList().reduce((accumulator, item) => {
+      return accumulator += item.amount;
+    }, 0);
   }
 
 }

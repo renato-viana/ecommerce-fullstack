@@ -20,11 +20,11 @@ services:
   db-migrate-test:
     build: .
     env_file:
-      - dev.test
+      - test.env
     command:
       [
         '/wait-for-it.sh',
-        'ecommerce-postgres-test:5433',
+        'ecommerce-postgres-test:5432',
         '-t',
         '10',
         '--',
@@ -36,3 +36,28 @@ services:
       - ecommerce-network-test
     depends_on:
       - ecommerce-postgres-test
+
+  ecommerce-api:
+    image: ecommerce-api
+    container_name: ecommerce-api
+    command:
+      [
+        '/wait-for-it.sh',
+        'ecommerce-postgres-test:5432',
+        '-t',
+        '15',
+        '--',
+        'npm',
+        'start'
+      ]
+    env_file:
+      - test.env
+    ports:
+      - 8081:8080
+    networks:
+      - ecommerce-network-test
+    depends_on:
+      - ecommerce-postgres-test
+
+volumes:
+  pgdata:

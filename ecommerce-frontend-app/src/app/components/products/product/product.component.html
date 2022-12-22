@@ -7,12 +7,13 @@
   >
     <img
       class="product-image"
-      src="assets/img/catalog/nintendo-switch-oled.png"
+      src="./assets/img/catalog/{{ productItem.name }}.png"
+      alt="{{ productItem.name }}"
     />
   </a>
   <h3>{{ productItem.name }}</h3>
   <p>
-    <strong>{{ productItem.price | currency: "USD" }} </strong>
+    <strong>{{ productItem.price | currency : "USD" }} </strong>
   </p>
 
   <select class="select-input" [(ngModel)]="selectedAmount">

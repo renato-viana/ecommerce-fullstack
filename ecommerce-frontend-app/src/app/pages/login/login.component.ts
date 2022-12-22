@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
-import { User } from 'src/app/models/user';
+import { UserRequest } from 'src/app/models/user';
 import { LoginService } from 'src/app/services/login.service';
 import { TokenResponse } from 'src/app/shared/tokenResponse';
 
@@ -44,15 +44,15 @@ export class LoginComponent {
       return;
     }
 
-    const user: User = {
+    const user: UserRequest = {
       email: this.email,
-      password: this.password
+      password: this.password,
     }
 
     this.login(user);
   }
 
-  login(user: User) {
+  login(user: UserRequest) {
     this.isLoading = true;
     this.loginService.login(user)
       .pipe(

@@ -1,10 +1,11 @@
-import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import express, { Request, Response } from 'express';
+
+import orderRoutes from './handlers/order';
 import productRoutes from './handlers/product';
 import userRoutes from './handlers/user';
-import orderRoutes from './handlers/order';
 
 dotenv.config();
 

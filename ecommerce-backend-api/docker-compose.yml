@@ -9,7 +9,7 @@ services:
     image: postgres:14.1
     container_name: ecommerce-postgres
     env_file:
-      - dev.env
+      - .env
     ports:
       - 5433:5432
     networks:
@@ -20,7 +20,7 @@ services:
   db-migrate:
     build: .
     env_file:
-      - dev.env
+      - .env
     command:
       [
         '/wait-for-it.sh',
@@ -51,7 +51,7 @@ services:
         'start'
       ]
     env_file:
-      - dev.env
+      - .env
     ports:
       - 8080:8080
     networks:

@@ -1,103 +1,146 @@
-<!-- <form #form="ngForm" (ngSubmit)="submitForm()" class="form-margin">
-  <div class="mb-3">
-    <label for="inputFullName" class="form-label">Full name</label>
-    <input
-      type="text"
-      class="form-control"
-      id="inputFullName"
-      name="fullName"
-      placeholder="Enter your full name"
-      required
-      minlength="3"
-      [(ngModel)]="fullName"
-      #name="ngModel"
-    />
-    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
-      <div *ngIf="name.errors?.['required']">Full name is required.</div>
-      <div *ngIf="name.errors?.['minlength']">
-        Full name must be at least 3 characters long.
-      </div>
-    </div>
-  </div>
-  <div class="mb-3">
-    <label for="inputAddress" class="form-label">Address</label>
-    <input
-      type="text"
-      class="form-control"
-      id="inputAddress"
-      name="address"
-      placeholder="Enter your address"
-      required
-      [(ngModel)]="address"
-    />
-  </div>
-  <div class="mb-3">
-    <label for="inputCardNumber" class="form-label">Credit card number</label>
-    <input
-      type="text"
-      class="form-control"
-      id="inputCardNumber"
-      name="cardNumber"
-      placeholder="(16-digit number)"
-      required
-      minlength="16"
-      [(ngModel)]="cardNumber"
-      #card="ngModel"
-    />
-    <div *ngIf="card.invalid && (card.dirty || card.touched)" class="alert">
-      <div *ngIf="card.errors?.['minlength']">
-        Credit card number must be 16 digits.
-      </div>
-    </div>
-  </div>
-  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
-    Submit
-  </button>
-</form> -->
 <div class="p-5">
+  <!--Summary-->
   <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
   <hr class="my-4" />
 
   <div class="d-flex justify-content-between mb-4">
-    <h5 class="text-uppercase">items 0</h5>
-    <h5>{{ cartTotalPrice() | currency: "USD" }}</h5>
+    <h5 class="text-uppercase">Subtotal (1 item):</h5>
+    <h5>{{ cartTotalPrice() | currency : "USD" }}</h5>
   </div>
 
   <h5 class="text-uppercase mb-3">Shipping</h5>
 
   <div class="mb-4 pb-2">
     <select class="select">
-      <option value="1">Standard - {{ 0.0 | currency: "USD" }}</option>
-      <option value="2">Express - {{ 5.0 | currency: "USD" }}</option>
+      <option value="1">Standard - {{ 0.0 | currency : "USD" }}</option>
+      <option value="2">Express - {{ 5.0 | currency : "USD" }}</option>
     </select>
-  </div>
-
-  <h5 class="text-uppercase mb-3">Give code</h5>
-
-  <div class="mb-5">
-    <div class="form-outline">
-      <input
-        type="text"
-        id="form3Examplea2"
-        class="form-control form-control-lg"
-      />
-      <label class="form-label" for="form3Examplea2">Enter your code</label>
-    </div>
   </div>
 
   <hr class="my-4" />
 
   <div class="d-flex justify-content-between mb-5">
     <h5 class="text-uppercase">Total price</h5>
-    <h5>{{ cartTotalPrice() | currency: "USD" }}</h5>
+    <h5>{{ cartTotalPrice() | currency : "USD" }}</h5>
   </div>
 
-  <button
-    type="button"
-    class="btn btn-dark btn-block btn-lg"
-    data-mdb-ripple-color="dark"
-    (click)="submitForm()"
-  >
-    Register
-  </button>
+  <hr class="my-4" />
+
+  <!--Payment Details-->
+  <form [formGroup]="paymentDetailsForm" class="form-group">
+    <h3 class="fw-bold mb-5 mt-2 pt-1">Payment Details</h3>
+
+    <!--Input Full Name-->
+    <div class="mb-3">
+      <label for="inputFullName" class="form-label">Full name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputFullName"
+        name="fullName"
+        placeholder="Enter your full name"
+        formControlName="fullName"
+      />
+      <div
+        *ngIf="
+          paymentDetailsForm.get('fullName')?.invalid &&
+          (paymentDetailsForm.get('fullName')?.dirty ||
+            paymentDetailsForm.get('fullName')?.touched)
+        "
+      >
+        <small
+          class="text-danger"
+          *ngIf="paymentDetailsForm.get('fullName')?.hasError('required')"
+        >
+          Full name is required.
+        </small>
+        <small
+          class="text-danger"
+          *ngIf="paymentDetailsForm.get('fullName')?.hasError('minlength')"
+        >
+          Full name must be at least 3 characters long.
+        </small>
+      </div>
+    </div>
+
+    <!--Input Address-->
+    <div class="mb-3">
+      <label for="inputAddress" class="form-label">Address</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputAddress"
+        name="address"
+        placeholder="Enter your address"
+        formControlName="address"
+      />
+      <div
+        *ngIf="
+          paymentDetailsForm.get('address')!.invalid &&
+          (paymentDetailsForm.get('address')!.dirty ||
+            paymentDetailsForm.get('address')!.touched)
+        "
+      >
+        <small
+          class="text-danger"
+          *ngIf="paymentDetailsForm.get('address')!.hasError('required')"
+        >
+          Address is required.
+        </small>
+        <small
+          class="text-danger"
+          *ngIf="paymentDetailsForm.get('address')!.hasError('minlength')"
+        >
+          Address must be at least 3 characters long.
+        </small>
+      </div>
+    </div>
+
+    <!--Input Card Number-->
+    <div class="mb-3">
+      <label for="inputCardNumber" class="form-label">Credit card</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputCardNumber"
+        name="cardNumber"
+        placeholder="(16-digit number)"
+        formControlName="cardNumber"
+      />
+      <div
+        *ngIf="
+          paymentDetailsForm.get('cardNumber')!.invalid &&
+          (paymentDetailsForm.get('cardNumber')!.dirty ||
+            paymentDetailsForm.get('cardNumber')!.touched)
+        "
+      >
+        <small
+          class="text-danger"
+          *ngIf="paymentDetailsForm.get('cardNumber')!.hasError('required')"
+        >
+          Credit card is required.
+        </small>
+        <small
+          class="text-danger"
+          *ngIf="
+            paymentDetailsForm.get('cardNumber')!.hasError('minlength') ||
+            paymentDetailsForm.get('cardNumber')!.hasError('maxlength')
+          "
+        >
+          Credit card number must be 16 digits.
+        </small>
+      </div>
+    </div>
+
+    <!--Button Pay Now-->
+    <button
+      type="button"
+      class="w-100 btn btn-lg btn-dark"
+      data-mdb-ripple-color="dark"
+      (click)="submitForm()"
+      [disabled]="paymentDetailsForm.invalid"
+    >
+      Pay Now
+    </button>
+  </form>
 </div>

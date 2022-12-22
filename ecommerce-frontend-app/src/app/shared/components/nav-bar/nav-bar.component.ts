@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,7 +9,13 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NavBarComponent {
 
+  faShoppingCart = faShoppingCart;
+
   constructor(private authService: AuthService) { }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
 
   logout(): void {
     this.authService.logout();

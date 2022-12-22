@@ -14,7 +14,7 @@
 /*New cart*/
 @media (min-width: 1025px) {
   .h-custom {
-    height: 100vh !important;
+    height: 100vh;
   }
 }
 
@@ -30,7 +30,7 @@
 }
 
 .bg-grey {
-  background-color: #eae8e8;
+  background-color: #f5f1f1;
 }
 
 @media (min-width: 992px) {

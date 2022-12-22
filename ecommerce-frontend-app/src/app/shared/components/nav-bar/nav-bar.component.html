@@ -19,23 +19,30 @@
           routerLink="/home"
           routerLinkActive="active"
           aria-current="page"
-          >Home</a
-        >
-        <a class="nav-link active" routerLink="/cart" routerLinkActive="active"
-          >Cart</a
+          >Catalog</a
         >
         <a class="nav-link active" routerLink="/about" routerLinkActive="active"
           >About</a
         >
         <a
           class="nav-link active"
+          routerLink=""
+          routerLinkActive="active"
+          (click)="logout()"
+        >
+          Logout
+        </a>
+        <a class="nav-link active" routerLink="/cart" routerLinkActive="active">
+          <fa-icon [icon]="faShoppingCart" class=""></fa-icon>
+          Cart
+        </a>
+        <a
+          class="nav-link active"
           routerLink="/sign-up"
           routerLinkActive="active"
+          *ngIf="!isLoggedIn()"
           >Sign Up</a
         >
-        <li>
-          <button class="btn btn-dark" (click)="logout()">Logout</button>
-        </li>
       </div>
     </div>
   </div>

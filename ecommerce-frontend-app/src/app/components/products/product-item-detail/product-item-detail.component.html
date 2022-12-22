@@ -12,11 +12,12 @@
       <strong>Add to cart!</strong>
     </div>
     <div class="detail-container">
-      <img class="" src="{{ product.url }}" />
+      <img class="" src="./assets/img/catalog/{{ product.name }}.png" />
+      <!-- <img class="" src="{{ product.url }}" /> -->
       <div class="detail-item">
         <h3>{{ product.name }}</h3>
         <p>
-          {{ product.price | currency: "USD" }}
+          {{ product.price | currency : "USD" }}
         </p>
         <p>
           {{ product.description }}

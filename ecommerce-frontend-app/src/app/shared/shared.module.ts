@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { CartComponent } from './components/cart/cart.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -17,6 +18,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
   imports: [
     CommonModule,
     RouterModule,
+    FontAwesomeModule
   ],
   exports: [
     NavBarComponent,

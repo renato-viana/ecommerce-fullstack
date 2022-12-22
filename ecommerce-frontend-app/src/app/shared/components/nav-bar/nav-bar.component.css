@@ -1,10 +1,12 @@
 .header {
   text-align: center;
-  background: #453823; /*#33b5e5*/
-  color: #fff;
+  background: #131921;
+  color: #ffffff;
   padding: 12px;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-a {
+.navbar a {
   color: #ffffff;
 }

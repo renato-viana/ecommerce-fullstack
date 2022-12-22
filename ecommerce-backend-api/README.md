@@ -7,12 +7,13 @@ This repo contains a basic Node and Express app to get you started in constructi
 ### Notes
 
 - I'm using Docker with docker compose to start the database and the API and run the migrations.
-- I have used the "[wait-for-it.sh](https://github.com/vishnubob/wait-for-it)" script to wait for db and migrations run.
+- I have used the "[wait-for-it.sh](https://github.com/vishnubob/wait-for-it)" script to wait for the database and migrations to run.
 
 ### Commands
 
 - 'docker image build -t ecommerce-api .' Build the image.
-- 'docker-compose up' Start the containers.
+- 'docker-compose up' Starts the containers with AWS configuration.
+- 'docker-compose -f docker-compose.test.yml up' Starts the local environment with docker-compose.test.yml
 
 ### Ports
 
@@ -25,7 +26,7 @@ Create the models for each database table. The methods in each model should map 
 
 ### 4. Express Handlers
 
-Set up the Express handlers to route incoming requests to the correct model method. Make sure that the endpoints you create match up with the enpoints listed in `REQUIREMENTS.md`. Endpoints must have tests and be CORS enabled. 
+Set up the Express handlers to route incoming requests to the correct model method. Make sure that the endpoints you create match up with the enpoints listed in `REQUIREMENTS.md`. Endpoints must have tests and be CORS enabled.
 
 ### Environment variables - requested
 
