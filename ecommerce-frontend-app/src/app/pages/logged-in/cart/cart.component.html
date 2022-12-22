@@ -33,7 +33,10 @@
                     class="d-flex justify-content-between align-items-center mb-5"
                   >
                     <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
-                    <h6 class="mb-0 text-muted">{{ cartItems }} items</h6>
+                    <h6 class="mb-0 text-muted">
+                      {{ cartQuantityItems() }}
+                      {{ cartQuantityItems() < 2 ? " item" : " items" }}
+                    </h6>
                   </div>
                   <hr class="my-4" />
 
@@ -63,9 +66,27 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4 bg-grey">
+              <div
+                class="col-lg-4 bg-grey"
+                *ngIf="cartQuantityItems() > 0; else buySomething"
+              >
                 <app-cart-form></app-cart-form>
               </div>
+              <ng-template #buySomething>
+                <div class="col-lg-4 bg-grey">
+                  <p class="fst-italic text-center">
+                    Did you know we currently offer a 15% discount on all of our
+                    products? 🤫 You can can see our products
+                    <a
+                      class="nav-link active"
+                      routerLink="/home"
+                      routerLinkActive="active"
+                      aria-current="page"
+                      >Here.</a
+                    >
+                  </p>
+                </div>
+              </ng-template>
             </div>
           </div>
         </div>

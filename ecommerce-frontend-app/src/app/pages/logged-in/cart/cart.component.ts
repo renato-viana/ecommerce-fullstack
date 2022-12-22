@@ -12,8 +12,7 @@ import { CartService } from '../../../services/cart.service';
 export class CartComponent implements OnInit {
 
   cartProductList: OrderItem[] = [];
-  cartTotal: number = 0;
-  cartItems: number = 0;
+  cartSubtotal: number = 0;
   faLongArrowAltLeft = faLongArrowAltLeft;
 
   constructor(private cartService: CartService) { }
@@ -23,13 +22,10 @@ export class CartComponent implements OnInit {
 
     this.cartChanges();
 
-    this.cartItemsQuantity();
   }
 
   private getCartList() {
     this.cartProductList = this.cartService.getCartList();
-    this.cartTotal = this.cartService.calculateTotal(this.cartProductList);
-    return this.cartProductList;
   }
 
   private cartChanges() {
@@ -40,13 +36,13 @@ export class CartComponent implements OnInit {
       } else {
         this.cartService.updateCart(productItem)
       }
-      this.cartTotal = this.cartService.calculateTotal(this.cartProductList);
+      this.cartSubtotal = this.cartService.calculateSubtotal(this.cartProductList);
     })
   }
 
-  private cartItemsQuantity(): void {
-    this.cartItems = this.getCartList().reduce((accumulator, item) => {
-      return accumulator += item.amount;
+  cartQuantityItems(): number {
+    return this.cartService.cartProductList.reduce((accumulator, item) => {
+      return accumulator += item.amount
     }, 0);
   }
 

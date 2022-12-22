@@ -21,7 +21,7 @@ export class ConfirmationComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartProductList = this.cartService.getCartList();
-    this.cartTotal = this.cartService.calculateTotal(this.cartProductList);
+    this.cartTotal = this.cartService.cartTotal;
     this.fullName = this.route.snapshot.paramMap.get('fullName');
   }
 

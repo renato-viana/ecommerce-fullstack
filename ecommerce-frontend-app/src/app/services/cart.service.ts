@@ -10,6 +10,7 @@ import { Product } from '../models/Product';
 export class CartService {
 
   cartProductList: OrderItem[] = [];
+  cartSubtotal: number = 0;
   cartTotal: number = 0;
 
   subject = new Subject<OrderItem>();
@@ -44,7 +45,7 @@ export class CartService {
       this.cartProductList.push(this.productToOrderItem(product, amount));
     }
 
-    this.calculateTotal(this.cartProductList);
+    this.calculateSubtotal(this.cartProductList);
   }
 
   private productToOrderItem(product: Product, amount: number): OrderItem {
@@ -69,7 +70,7 @@ export class CartService {
       this.cartProductList.push(productItem);
     }
 
-    this.calculateTotal(this.cartProductList);
+    this.calculateSubtotal(this.cartProductList);
   }
 
   removeProduct(productItem: OrderItem): void {
@@ -77,16 +78,21 @@ export class CartService {
       item => item.product.id !== productItem.product.id
     )
 
-    this.calculateTotal(this.cartProductList);
+    this.calculateSubtotal(this.cartProductList);
   }
 
-  calculateTotal(cartItemList: OrderItem[]): number {
-    this.cartTotal = 0;
+  calculateSubtotal(cartItemList: OrderItem[]): number {
+    this.cartSubtotal = 0;
 
     cartItemList.forEach(productItem => {
-      this.cartTotal += productItem.amount * productItem.unitPrice;
+      this.cartSubtotal += productItem.amount * productItem.unitPrice;
     });
 
+    return this.cartSubtotal;
+  }
+
+  calculateTotal(deliveryFee: number): number {
+    this.cartTotal = this.cartSubtotal + Number(deliveryFee);
     return this.cartTotal;
   }
 
@@ -98,7 +104,7 @@ export class CartService {
       } else {
         this.updateCart(productItem)
       }
-      this.cartTotal = this.calculateTotal(this.cartProductList);
+      this.cartSubtotal = this.calculateSubtotal(this.cartProductList);
     })
   }
 }

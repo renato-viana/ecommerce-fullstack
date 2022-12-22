@@ -23,12 +23,13 @@ export class CartFormComponent implements OnInit {
     private cartService: CartService
   ) { }
 
-  items: OrderItem[] = this.cartService.getCartList();
-  totalPrice: number = this.cartService.cartTotal;
+  items: OrderItem[] = [];
+  cartSubtotal: number = 0;
+  selectedOption: number = 0;
 
   ngOnInit(): void {
     this.items = this.cartService.getCartList();
-    this.totalPrice = this.cartService.calculateTotal(this.items);
+    this.cartSubtotal = this.cartService.calculateSubtotal(this.items);
 
     this.initializeForm();
   }
@@ -63,7 +64,18 @@ export class CartFormComponent implements OnInit {
     return this.paymentDetailsForm.get('fullName');
   }
 
-  cartTotalPrice() {
-    return this.cartService.cartTotal;
+  cartSubTotal() {
+    return this.cartService.cartSubtotal;
   }
+
+  cartTotalPrice() {
+    return this.cartService.calculateTotal(this.selectedOption);
+  }
+
+  cartQuantityItems() {
+    return this.cartService.cartProductList.reduce((accumulator, item) => {
+      return accumulator += item.amount
+    }, 0);
+  }
+
 }

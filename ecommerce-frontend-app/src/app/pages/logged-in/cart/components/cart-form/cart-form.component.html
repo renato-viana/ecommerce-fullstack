@@ -4,23 +4,30 @@
   <hr class="my-4" />
 
   <div class="d-flex justify-content-between mb-4">
-    <h5 class="text-uppercase">Subtotal (1 item):</h5>
-    <h5>{{ cartTotalPrice() | currency : "USD" }}</h5>
+    <h5 class="">
+      Subtotal ({{ cartQuantityItems() }}
+      {{ cartQuantityItems() < 2 ? " item" : " items" }}):
+    </h5>
+    <h5>{{ cartSubTotal() | currency : "USD" }}</h5>
   </div>
 
-  <h5 class="text-uppercase mb-3">Shipping</h5>
+  <h5 class="mb-3">Shipping</h5>
 
   <div class="mb-4 pb-2">
-    <select class="select">
-      <option value="1">Standard - {{ 0.0 | currency : "USD" }}</option>
-      <option value="2">Express - {{ 5.0 | currency : "USD" }}</option>
+    <select
+      class="select"
+      [(ngModel)]="selectedOption"
+      (keydown)="cartTotalPrice()"
+    >
+      <option value="0">Standard - {{ 0.0 | currency : "USD" }}</option>
+      <option value="5">Express - {{ 5.0 | currency : "USD" }}</option>
     </select>
   </div>
 
   <hr class="my-4" />
 
   <div class="d-flex justify-content-between mb-5">
-    <h5 class="text-uppercase">Total price</h5>
+    <h5 class="">Total</h5>
     <h5>{{ cartTotalPrice() | currency : "USD" }}</h5>
   </div>
 
